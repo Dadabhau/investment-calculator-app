@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import type { InvestmentModule } from '../modules/invest.module';
-import { InvestmentResultModule } from '../modules/result.module';
+import type { InvestmentModule } from '../modules/invest.model';
+import { InvestmentResultModule } from '../modules/result.model';
 
 @Injectable({
   providedIn: 'root',
