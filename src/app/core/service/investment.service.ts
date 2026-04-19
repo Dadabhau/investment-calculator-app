@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import type { InvestmentModule } from '../modules/invest.module';
 import { InvestmentResultModule } from '../modules/result.module';
 
@@ -6,7 +6,7 @@ import { InvestmentResultModule } from '../modules/result.module';
   providedIn: 'root',
 })
 export class InvestmentService {
-  investmentResults: InvestmentResultModule[] = [];
+  investmentResults = signal<InvestmentResultModule[]>([]);
 
   onCalculateInvestmentResults(data: InvestmentModule) {
     const { initialInvestment, annualInvestment, expectedReturn, duration } = data;
@@ -29,6 +29,6 @@ export class InvestmentService {
     }
 
     console.log(annualData);
-    this.investmentResults = annualData;
+    this.investmentResults.set(annualData);
   }
 }
