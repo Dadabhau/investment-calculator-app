@@ -1,16 +1,20 @@
 import { Component, signal } from '@angular/core';
 import { Header } from './layouts/header/header';
 import { UserInput } from './features/user-input/user-input';
-import { InvestmentModule } from './core/modules/invest.module';
+import type { InvestmentModule } from './core/modules/invest.module';
+import { InvesmentResult } from './features/invesment-result/invesment-result';
+import type { InvestmentResultModule } from './core/modules/result.module';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, UserInput],
+  imports: [Header, UserInput, InvesmentResult],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
   protected readonly title = signal('investment-calculator-app');
+  // investmentResults: InvestmentResultModule[] = [];
+  investmentResults = signal<InvestmentResultModule[]>([]);
 
   onCalculateInvestmentResults(data: InvestmentModule) {
     const { initialInvestment, annualInvestment, expectedReturn, duration } = data;
@@ -33,6 +37,8 @@ export class App {
     }
 
     console.log(annualData);
-    return annualData;
+    // this.investmentResults = annualData;
+    this.investmentResults.set(annualData);
+    // return annualData;
   }
 }
